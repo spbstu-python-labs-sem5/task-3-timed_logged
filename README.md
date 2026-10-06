@@ -1,26 +1,21 @@
-# Задача №3: декоратор `timed_logged`
+# Задача №3: декоратор timed_logged
 
 ## Реализовать декоратор, который будет:
 
-- Измерять время выполнения функции в миллисекундах.
-- Выводить имя, аргументы, результат и время выполнения.
-- При ошибке логировать её тип и сообщение, не скрывая исключение.
-- Работать с любыми сигнатурами (`*args`, `**kwargs`).
-- Сохранять метаданные функции (`__name__`, `__doc__`) через `functools.wraps`.
+- Измерять время выполнения функции (в мс).
+- Выводить: имя функции, аргументы, результат, время.
+- При ошибке — логировать тип и сообщение исключения, не скрывая его.
+- Работать с любыми сигнатурами (\*args, \*\*kwargs).
+- Сохранять метаданные функции (**name**, **doc**) через functools.wraps.
 
-## Пример использования
+## Пример использования:
 
 ```python
-from time import sleep
-
-from timed_logged import timed_logged
-
-
 @timed_logged
 def slow_sum(a, b, delay=0.5):
-    sleep(delay)
-    return a + b
-
+	import time
+	time.sleep(delay)
+	return a + b
 
 slow_sum(1, 2, delay=0.2)
 ```
@@ -44,6 +39,25 @@ python3 -m venv .venv
 .venv/bin/python example.py
 .venv/bin/python -m unittest
 ```
+
+## Пример использования
+## Пример использования
+
+```python
+from time import sleep
+
+from timed_logged import timed_logged
+
+
+@timed_logged
+def slow_sum(a, b, delay=0.5):
+    sleep(delay)
+    return a + b
+
+
+slow_sum(1, 2, delay=0.2)
+```
+
 
 При запуске `example.py` введи, например, `0.2`, чтобы функция ждала 0,2 секунды.
 
