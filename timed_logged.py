@@ -9,18 +9,16 @@ def timed_logged(func):
         try:
             result = func(*args, **kwargs)
         except BaseException as error:
+            outcome = f"{type(error).__name__}: {error}"
+            raise
+        else:
+            outcome = repr(result)
+        finally:
             elapsed = (perf_counter() - started) * 1000
             print(
                 f"{func.__name__}(args={args}, kwargs={kwargs}) -> "
-                f"{type(error).__name__}: {error} [{elapsed:.3f} ms]"
+                f"{outcome} [{elapsed:.3f} ms]"
             )
-            raise
-
-        elapsed = (perf_counter() - started) * 1000
-        print(
-            f"{func.__name__}(args={args}, kwargs={kwargs}) -> "
-            f"{result!r} [{elapsed:.3f} ms]"
-        )
         return result
 
     return wrapper
